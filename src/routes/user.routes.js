@@ -14,6 +14,6 @@ router.route("/login").post(login);
 
 // protected routes
 router.route("/logout").post(verifyJWT, logout);
-router.route("/refresh-token").post(verifyJWT, refreshAccessToken);
+router.route("/refresh-token").post(refreshAccessToken);
 
 export default router;
