@@ -11,10 +11,10 @@ import { upload } from "../middlewares/multer.middleware.js";
 
 const router = Router();
 
-// all post routes are protected
+router.route("/").get(getFeed); // public
+// post routes are protected
 router.use(verifyJWT);
 
-router.route("/").get(getFeed);
 router.route("/create").post(upload.single("image"), createPost);
 router.route("/:postId").get(getPost);
 router.route("/:postId/like").post(toggleLike);

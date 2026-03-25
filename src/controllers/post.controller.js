@@ -43,9 +43,12 @@ const getFeed = asyncHandler(async (req, res) => {
     .populate("comments.user", "username") // replace comment user ObjectId with username
     .sort({ createdAt: -1 }); // newest post first
 
+  // filter out posts where author was deleted
+  const validPosts = posts.filter((post) => post.author !== null);
+
   return res
     .status(200)
-    .json(new ApiResponse(200, posts, "Feed fetched successfully"));
+    .json(new ApiResponse(200, validPosts, "Feed fetched successfully"));
 });
 
 // toggle like unlike
