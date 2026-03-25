@@ -30,10 +30,10 @@ const userSchema = new Schema(
 
 // validate just before save, then move to next
 userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
+  if (!this.isModified("password")) return next;
 
   this.password = await bcrypt.hash(this.password, 10);
-  next();
+  next;
 });
 
 userSchema.methods.isPasswordCorrect = async function (password) {
@@ -63,7 +63,7 @@ userSchema.methods.generateRefreshToken = function () {
     },
     process.env.REFRESH_TOKEN_SECRET,
     {
-      expiersIn: process.env.REFRESH_TOKEN_EXPIRY,
+      expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
     }
   );
 };

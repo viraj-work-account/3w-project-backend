@@ -47,7 +47,7 @@ postSchema.pre("validate", function (next) {
   if (!this.text && !this.image) {
     return next(new Error("Post must have either text or image"));
   }
-  next();
+  next;
 });
 
 export const Post = mongoose.model("Post", postSchema);
